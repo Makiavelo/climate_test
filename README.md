@@ -56,11 +56,18 @@ www/climate_test/src/Repository/GrowerRepository.php
 ```
 [Link to file](www/climate_test/src/Repository/GrowerRepository.php)
 
-And here is the command code
+Here is the command code
 ```
 www/climate_test/src/Command/SearchGrowersCommand.php
 ```
 [Link to file](www/climate_test/src/Command/SearchGrowersCommand.php)
+
+And here are the test files
+```
+www/climate_test/tests/
+```
+[Link to file](www/climate_test/tests/Functional/GrowerSearchTest.php)
+
 
 #### Database schema
 ![Database schema](imgs/db_schema.png)
