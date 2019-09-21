@@ -24,18 +24,6 @@ class GrowerRepository extends ServiceEntityRepository
      */
     public function findByYearAndCropType($year, $cropType)
     {
-        /*$em = $this->getEntityManager();
-
-        $query = $entityManager->createQuery(
-            'SELECT p
-            FROM App\Entity\Grower g
-            WHERE p.price > :price
-            ORDER BY p.price ASC'
-        )->setParameter('price', $price);
-
-        // returns an array of Product objects
-        return $query->execute();*/
-
         return $this->createQueryBuilder('g')
             ->leftJoin('g.farms', 'f')
             ->leftJoin('f.plantingEvents', 'pe')
@@ -47,7 +35,6 @@ class GrowerRepository extends ServiceEntityRepository
             ->orderBy('pe.date', 'DESC')
             ->getQuery()
             ->getResult()
-            //->getArrayResult()
         ;
     }
 }
