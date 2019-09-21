@@ -1,0 +1,47 @@
+version: '3'
+services:
+  serverc:
+    container_name: serverc
+    hostname: serverc
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8001:80"
+    volumes:
+      - ./www:/var/www/html
+    networks:
+      - skynet
+
+  dbc:
+    container_name: dbc
+    hostname: dbc
+    image: mysql
+    ports:
+        - "3306:3306"
+    environment:
+        MYSQL_DATABASE: climate
+        MYSQL_USER: user
+        MYSQL_PASSWORD: test
+        MYSQL_ROOT_PASSWORD: root
+    volumes:
+      - ./dump:/docker-entrypoint-initdb.d
+    command: ['--character-set-server=utf8mb4', '--collation-server=utf8mb4_unicode_ci','--default-authentication-plugin=mysql_native_password']
+    networks:
+      - skynet
+
+  phpmyadmin:
+    container_name: phpmyadmin
+    image: phpmyadmin/phpmyadmin
+    restart: always
+    ports:
+        - 8002:80
+    environment:
+      - PMA_ARBITRARY=1
+    volumes:
+      - /sessions
+    networks:
+      - skynet
+
+networks:
+  skynet:
